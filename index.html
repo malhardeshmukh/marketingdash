@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SignalBoard — Campaign Performance Command Center</title>
+  <meta name="description"
+    content="SignalBoard helps performance marketers see at a glance which channels are hitting targets — and diagnose exactly why performance shifted." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ═══════════ SIDEBAR ═══════════ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+            <path d="M3 14 L7 9 L11 11.5 L16 4" stroke="#2BB3A3" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <circle cx="16" cy="4" r="2.5" fill="#2BB3A3" />
+          </svg>
+        </div>
+        <span class="brand-name">SignalBoard</span>
+      </div>
+
+      <nav class="sidebar-nav" id="sidebar-nav">
+        <div class="nav-section-label">OVERVIEW</div>
+        <a class="nav-item active" data-page="dashboard" href="#" id="nav-dashboard">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="7" height="7" rx="1" />
+            <rect x="11" y="2" width="7" height="7" rx="1" />
+            <rect x="2" y="11" width="7" height="7" rx="1" />
+            <rect x="11" y="11" width="7" height="7" rx="1" />
+          </svg>
+          <span>Command Center</span>
+        </a>
+        <a class="nav-item" data-page="alerts" href="#" id="nav-alerts">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span>Alerts</span>
+          <span class="nav-badge" id="nav-alerts-badge">4</span>
+        </a>
+
+        <div class="nav-section-label" style="margin-top:12px;">CHANNELS</div>
+        <a class="nav-item" data-page="drilldown" data-channel="meta" href="#" id="nav-meta">
+          <span class="channel-dot" style="background:#1877f2;"></span>
+          <span>Meta Ads</span>
+          <span class="nav-status-dot red" id="navdot-meta"></span>
+        </a>
+        <a class="nav-item" data-page="drilldown" data-channel="google" href="#" id="nav-google">
+          <span class="channel-dot" style="background:#34a853;"></span>
+          <span>Google Ads</span>
+          <span class="nav-status-dot green" id="navdot-google"></span>
+        </a>
+        <a class="nav-item" data-page="drilldown" data-channel="tiktok" href="#" id="nav-tiktok">
+          <span class="channel-dot" style="background:#69C9D0;"></span>
+          <span>TikTok Ads</span>
+          <span class="nav-status-dot green" id="navdot-tiktok"></span>
+        </a>
+        <a class="nav-item" data-page="drilldown" data-channel="linkedin" href="#" id="nav-linkedin">
+          <span class="channel-dot" style="background:#0a66c2;"></span>
+          <span>LinkedIn Ads</span>
+          <span class="nav-status-dot amber" id="navdot-linkedin"></span>
+        </a>
+
+        <div class="nav-section-label" style="margin-top:12px;">REPORTS</div>
+        <a class="nav-item" data-page="trends" href="#" id="nav-trends">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span>Trend Analysis</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="date-range-select">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round">
+            <rect x="3" y="4" width="14" height="14" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="17" y2="10" />
+          </svg>
+          <span>Last 14 days</span>
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <div class="user-row">
+          <div class="user-avatar">ML</div>
+          <div class="user-info">
+            <div class="user-name">Malhar Deshmukh</div>
+            <div class="user-role">Head of Performance</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ═══════════ MAIN CONTENT ═══════════ -->
+    <div class="main" id="main">
+
+      <!-- TOP BAR -->
+      <header class="topbar" id="topbar">
+        <div class="topbar-left">
+          <button class="back-btn hidden" id="back-btn">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <div>
+            <h1 class="page-title" id="page-title">Command Center</h1>
+            <p class="page-subtitle" id="page-subtitle">Real-time campaign health across all channels</p>
+          </div>
+        </div>
+        <div class="topbar-right" id="topbar-right">
+          <div class="status-pill" id="status-pill">
+            <span class="status-dot green"></span>
+            3 on target · 1 needs attention
+          </div>
+          <button class="icon-btn" id="btn-refresh" title="Refresh">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10" />
+              <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+            </svg>
+          </button>
+          <button class="icon-btn" title="Export">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE: DASHBOARD -->
+      <section class="page active" id="page-dashboard">
+        <div class="briefing-banner" id="briefing-banner"></div>
+        <div class="kpi-grid" id="kpi-grid"></div>
+        <div class="section-header">
+          <h2 class="section-title">Channel Status</h2>
+          <div class="filter-pills" id="channel-filter-pills">
+            <button class="pill active" data-filter="all">All</button>
+            <button class="pill" data-filter="attention">Needs Attention</button>
+            <button class="pill" data-filter="on-track">On Track</button>
+          </div>
+        </div>
+        <div class="channel-grid" id="channel-grid"></div>
+        <div class="section-header" style="margin-top:32px;">
+          <h2 class="section-title">Active Alerts</h2>
+          <span class="count-badge" id="alert-count-badge"></span>
+        </div>
+        <div class="alert-list" id="alert-list"></div>
+      </section>
+
+      <!-- PAGE: ALERTS -->
+      <section class="page" id="page-alerts">
+        <div id="alerts-content"></div>
+      </section>
+
+      <!-- PAGE: DRILL-DOWN -->
+      <section class="page" id="page-drilldown">
+        <div id="drilldown-content"></div>
+      </section>
+
+      <!-- PAGE: TRENDS -->
+      <section class="page" id="page-trends">
+        <div id="trends-content"></div>
+      </section>
+
+    </div><!-- /main -->
+  </div><!-- /app -->
+
+  <script src="data.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
